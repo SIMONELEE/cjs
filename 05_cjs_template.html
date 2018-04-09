@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script type="text/javascript">
+	
+	// NOTE for Dreamweaver: Does NOT work in "Real time preview", choose temporary file instead!	
+	// Best to be served from localhost ;-)
+	
+function init(){
+	//THE STAGE CLASS IS FROM THE EAEL LIBRARY. WE CREATE A NEW STAGE CALLED "DEMOCANVAS" AND INSIDE HAPPENS IN THIS STAGE. THE CANVAS OBJECT IS GETTING OUR STAGE.
+	stage = new createjs.Stage("demoCanvas");
+}
+	
+</script>
+
+<style type="text/css">
+#demoCanvas {
+	border: 1px solid gray;
+	padding: 2px;
+}
+</style>
+</head>
+
+<body onload="init();"> <!--WHEN THE BODY IS LOADED, THE INIT FUNCTION RUNS-->
+<canvas id="demoCanvas" width="500" height="300"> alternate content </canvas>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script type="text/javascript">
+	
+	// NOTE for Dreamweaver: Does NOT work in "Real time preview", choose temporary file instead!	
+	// Best to be served from localhost ;-)
+	
+function init(){
+	stage = new createjs.Stage("demoCanvas");
+	createjs.Ticker.addEventListener('tick', tickHandler);
+	handleImageLoad(); //TO HANDLE IMAGES
+	rotateButterfly();
+	handleSound();
+}
+	
+	
+function tickHandler(e){ 
+	stage.update(); 
+}
+	
+//A NEW FUNCTION TO HANDLE IMAGES
+function handleImageLoad(){
+	//CALLING THE BITMAP CLASS AND WHEN INSTAIATED IT TAKES ONE ARGUEMNT : THE PATH TO THE FILE ITSELf
+	//ADD PROPERTIES TO THE IMAGE WITH SCALE-X & SCALE-Y
+	butterfly = new createjs.Bitmap('images/butterfly.png');
+	butterfly.scaleX = 0.2; //WILL BE APPROX. 0.3 LESSER THAN ITS ORIGINAL SIZE
+	butterfly.scaleY = 0.2;
+	stage.addChild(butterfly); //THIS IS ADDING THE BUTTERFLY TO THE STAGE. ALWAYS ADDCHILD!!
+}
+	
+function rotateButterfly(){
+	createjs.Tween.get(butterfly) 
+	//YOU CAN ADD MORE MOVING ARGUEMTN AFTER ANOTHER AND LET IT BE A CHAIN REACTION
+	.wait(1000) //LET HE BITMAP WAIT WHERE WHEREEVER IT IS 
+	.to({x:450, y:250, rotation: 360}, 2000) //ROTATION ARGUMENT IS IN DEGREES
+	.to({x:10, y:10, rotation: -360}, 2000)
+	.wait(1000)
+	.call(goneButterfly); //THIS REMOVES THE BUTTERFLY WHEN THE ANIMATION IS FINISHED 
+}
+	
+function goneButterfly(){
+	//ADD SOUNDS TO WHEN THE BUTTERFLY IS GONE
+	//ASSIGN EVENT HANDLER - SOUND LOAD
+	createjs.Sound.on("fileload", handleSound);
+	//REGISTER THE SOUND:
+	createjs.Sound.registerSound('audio/whosh.mp3', 'whosh');//ALIKE LOADING A BITMAP - THE ARGUEMNT FROM THE REGISTER SOUND METHOD/FUNCTION IS THE TARGET PATH AND THEN IT GETS AN INSTANTS NAME OF YOUR CHOICE
+	stage.removeChild(this); //DON'T NEED TO SPECIFT BUTTERFLY, AS THE FUNCTIONS CONTEXT SHOULD REMOVE THE CHILD THAT IS IN THE CALLBACK FUNCTION.
+}
+	
+function handleSound(){
+	sound = createjs.Sound.play('whosh');
+}
+	
+	
+</script>
+
+<style type="text/css">
+#demoCanvas {
+	border: 1px solid gray;
+	padding: 2px;
+}
+</style>
+</head>
+
+<body onload="init();"> <!--WHEN THE BODY IS LOADED, THE INIT FUNCTION RUNS-->
+<canvas id="demoCanvas" width="500" height="300"> alternate content </canvas>
+</body>
+</html>

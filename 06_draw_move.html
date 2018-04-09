@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script type="text/javascript">
+	
+	// NOTE for Dreamweaver: Does NOT work in "Real time preview", choose temporary file instead!	
+	// Best to be served from localhost ;-)
+	
+function init(){ //CONVENTION IS INIT NAME
+	//THE STAGE CLASS IS FROM THE EAEL LIBRARY. WE CREATE A NEW STAGE CALLED "DEMOCANVAS" AND INSIDE HAPPENS IN THIS STAGE. THE CANVAS OBJECT IS GETTING OUR STAGE.
+	stage = new createjs.Stage("demoCanvas"); //PREFERED MODULARIZED. IS THE OVERALL OBJECT. EVEYTHING INSIDE THE STAGE IS A CHILD
+	drawCircle();
+	moveCircle(); //HERE WE MAKE THE CIRCLE MOVE
+	//TICKER THAT WILL AUTOMATICALLY UPDATE THE STAGE
+	//TICKER CLASS DOCUMENTED IN THE EASEL DOCUMENT
+	createjs.Ticker.addEventListener('tick', tickHandler); //THE EVENT IS A TICK AND PERFORM THE TICKHANDLER FUNCTION
+	
+}
+	
+	
+	function tickHandler(e){ //THE 'E' IS HOOKED UP TO THE TICK EVENT. WHEN YOU HAVE A FUNCTION THAT DEPENDS UPON A EVENT, YOU NEED A VARAIBLE TO CONNECT THE TWO. THIS IS DONE HERE WITH THE E
+		stage.update(); //THE ONLY THING WE WANT INSIDE HERE IS THE STAGE UPDATE. THEN THE STAGE UPDATE WILL RUN AUTOMATICALLY ACCORDING TO THE TICK. IT RUNS INDEPENDIENTLY.
+	}
+	
+	function drawCircle(){
+		circle = new createjs.Shape(); //INSTATIATING THE SHAPE CLASS (ONLY A CONTAINER)
+		circle.graphics.beginFill('#FFF000'); // THIS FILLS IN THE EMPOTY CONTAINER FROM THE GRAPHIS CLASS. THE BEGINFILL TAKES ONE ARGUMENT - A STRING COLOUR
+		circle.x = 50; //CHANGING THE LOCATION OF THE CIRCLE
+		circle.y = 50;//CHANGING THE LOCATION OF THE CIRCLE
+		circle.graphics.drawCircle(0, 0, 50); //NOW WE CREATE THE CIRCLE AND PROVIDES IT WITH THE COORDINATES (x, y, radius)
+		stage.addChild(circle); //WE STILL NEED TO ADD THE CIRCLE TO THE STAGE. EVERYTHING INSIDE THE STAGE IS A CHILD
+		//stage.update(); //UPDATE THE STAGE - OUTCOMMENTED: TICKER CLASS THAT WILL UPDATE AUTOMATICALLY
+	}
+	
+	
+	function moveCircle(){
+		createjs.Tween.get(circle, {loop: true}) //ADDING THE ", {LOOP:TRUE}" THE MOVEMENT WILL LOOP
+		.to({x:450, y:250}, 2000); //OBJECT NOTATION - FIRST PARARMETER IS THE COORDINATES - SECOND PARAMETER IS THE TIME IN MILISECONDS. 
+	}
+	
+</script>
+
+<style type="text/css">
+#demoCanvas {
+	border: 1px solid gray;
+	padding: 2px;
+}
+</style>
+</head>
+
+<body onload="init();"> <!--WHEN THE BODY IS LOADED, THE INIT FUNCTION RUNS-->
+<canvas id="demoCanvas" width="500" height="300"> alternate content </canvas>
+</body>
+</html>

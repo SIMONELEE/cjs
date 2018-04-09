@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script type="text/javascript">
+	
+// NOTE for Dreamweaver: Does NOT work in "Real time preview", choose temporary file instead!	
+// Best to be served from localhost ;-)
+
+//GLOBAL VARIABLES
+var stage, w, h, circle, clickCounter, circleColour, score;
+	
+//IT'S INITILIASED AS TRUE AND THEN YOU DON'T HAVE TO SET THE VALUE AS FALSE.
+//var clickCounter = false;
+	
+function init(){
+	stage = new createjs.Stage("demoCanvas");
+	//ON LOAD (INITIALISING THE GAME) GET THE W AND H RIGHT AWAY.
+	w = demoCanvas.width; //BECUASE WE NEED THE WIDTH FROM THE STAGE, ITS THE CANVAS AND THEN THE CANVAS HAS AN ID
+	h = demoCanvas.height;
+	//console.log(h); //TO CHECK THE FUNCTIO IS RIGHT
+	createjs.Ticker.addEventListener('tick', tickHandler);
+	drawCircle();
+	window.onkeydown = onKey; //REGISTRERING AN EVENTHANDLER FOR WINDOW IF ANY KEY IS PRESSED
+	circle.addEventListener('click', clickCircle);
+	addScore();
+	
+	
+}
+	
+	
+function tickHandler(e){
+	circle.alpha = 1; //RETURN TO THE ORIGINAL ALPHA 
+	//IMPLEMENTING A BASIC HIT TEST
+	//IF THE HITTEST BETWEEN THE MOUSE COORDINATES THEN {DO SOMETHING - CAN ALSO BE A FUNCTION - IN THIS CASE IT JUST CHANGES THE ALPHA (OPSITY)}
+	//MAPPING THE GLOBAL MOUSE CORRIDANTES TO THE LOCAL POSITION OF THE CIRCLE.
+	var pt = circle.globalToLocal(stage.mouseX, stage.mouseY); //TO CHANGE THE GLOBAL COORIDNATES TO LOCAL. THE CIRCLES CURRENT COORDINATES TO THE MOUSE. 
+	//console.log(pt.x, pt.y);
+	if (stage.mouseInBounds && circle.hitTest(pt.x, pt.y)) {circle.alpha = 0.1; };
+	//MOUSEINBOUNDS - TRACK ONLY IF MOUSE IS IN THE STAGE SOMEWHERE. IT'S PREMADE.
+
+	stage.update(); 
+}
+	
+	
+function drawCircle(){ 
+	circle = new createjs.Shape(); 
+	circleColour = circle.graphics.beginFill('purple').command; 
+	circle.x = w/2; // WE NEED THIS TO PLACE THE CIRLE IN THE MIDDLE OF THE CANVAS
+	circle.y = h/2; // WE NEED THIS TO PLACE THE CIRLE IN THE MIDDLE OF THE CANVAS
+	circle.graphics.drawCircle(0, 0, 50); //NOW WE CREATE THE CIRCLE AND PROVIDES IT WITH THE COORDINATES (x, y, radius)
+	stage.addChild(circle);
+
+}
+	
+//ON CLICK ON THE CIRCLE. IT'S BOOLEAN AS IT'S TWO CONDITIONS AND THEN YOU CHANGE THE COLOUR
+function clickCircle(){
+	if(!clickCounter){
+		circleColour.style = 'pink';
+	  	/*circle.graphics.clear();
+		circle.graphics.beginFill('#FF0000');
+		circle.graphics.drawCircle(0, 0, 50);*/
+		clickCounter = true;
+		//console.log('Circle clicked!'); FOR TESTING
+	} else {
+		circleColour.style = 'purple';
+		/*circle.graphics.clear();
+		circle.graphics.beginFill('#FFF000');
+		circle.graphics.drawCircle(0, 0, 50);*/
+		clickCounter = false;
+		//console.log('Circle clicked again!'); FOR TESTING
+	   }
+	
+	score.value++; //TANSFER THIS VALUE TO THE SCORE 
+	score.text = score.value; //THE TEXT PROPERTY OF THE ADDSCORE SCORE TEXT AND THEN ADD THE VALUE OF THE CLICKCIRCLE - TO THAT THE CLIKCED SCORE WILL BE TRANSFERED TO TGE TEXT IN THE ADDSCORE FUNCTION
+	console.log(score.value);
+	}
+
+function addScore(){
+	score = new createjs.Text(0, "20px Arial", "blue"); //THE INITIAL VALUE (TEXT CONTENT), THE FONT AND THEN COLOUR. YOU CAN DELETE THE 0 AND THEN THE INITIAL VALUE WILL BE NOTHING AND IT STARTS COUNTING FROM THE CLICKS.
+	score.x = w - 50; //ADJUSTABLE TO THE CONVAS
+	score.y = h - h + 50;
+	score.textBaseline = "alphabetic"; //VERTICAL ALIGNMENT
+	score.value = 0; //TASSESING THE VALUE AND SET IT TO 0
+	stage.addChild(score);
+}
+	
+//WHEN AN ARROW KEY IS DOWN
+function onKey(e){
+	switch(e.keyCode){
+		case 37: 
+			console.log('move left');
+			circle.x -= 10;
+			break;
+			
+		case 39:
+			console.log('move right');
+			circle.x += 10;
+			break;
+			
+		case 38:
+			console.log('move up');
+			circle.y -= 10;
+			break;
+			
+		case 40: 
+			console.log('move down');
+			circle.y += 10;
+			break;
+					}
+}
+
+	
+</script>
+
+<style type="text/css">
+#demoCanvas {
+	border: 1px solid gray;
+	padding: 2px;
+}
+</style>
+</head>
+
+<body onload="init();"> <!--WHEN THE BODY IS LOADED, THE INIT FUNCTION RUNS-->
+<canvas id="demoCanvas" width="500" height="300"> alternate content </canvas>
+</body>
+</html>
