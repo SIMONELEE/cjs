@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- THIS IS A VERSION OF THE GAME WITHOUT/BEFORE THE HITTEST. IT HAS THE ESSENTIAL ELEMENTS OF THE GAME, BUT NO HITTEST TO SET THE SCORE.  -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -23,6 +24,7 @@ function init(){
 }
 	
 function tick(event) {
+	//I MADE THIS HITTEST EXAMPLE TO TEST THAT THE SCORE WAS FUNCTIONING
 	var pt = target.globalToLocal(stage.mouseX, stage.mouseY); 
 	if (stage.mouseInBounds && target.hitTest(pt.x, pt.y)) {score.value++; 
 	score.text = score.value; };

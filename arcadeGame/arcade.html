@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- THIS IS THE VERSION OF THE GAME AFTER TRYING TO IMPLEMENT THE HITTEST. FROM CLASS I TRIED TO IMPLEMENT THE LOCALTOLOCAL THAT WE TALKED ABOUT AND THE CORRDINATES TO TRACK THE BULLET, BUT I WAS UNSUCCESSFULL IN IMPLEMENTING THESE. I WORKED FOR HOURS TRYING DIFFERENT SOLUTIONS, BUT I AM MISSING A STEP TO PUT EVERYTHING TOGETHER. -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -8,8 +9,8 @@
 	
 	// NOTE for Dreamweaver: Does NOT work in "Real time preview", choose temporary file instead!
 	
-var gun, bullet, score, gunCoord, bulletCoord, target, w, h; // global variables
-var fired = false;
+var gun, bullet, target, score, gunCoord, bulletCoord; // global variables
+var w, h;	
 	
 function init(){
 	stage = new createjs.Stage("demoCanvas");
@@ -22,6 +23,7 @@ function init(){
 	window.onkeydown = operateGun;
 	createjs.Ticker.on("tick", tick); // the main listener
 }
+
 	
 function tick(event) {	
 	gunCoord = gun.localToGlobal(w / 2, h - 20); //ALWAYS TRACING THE X POSITION OF THE GUN
@@ -33,8 +35,8 @@ function tick(event) {
 function drawGun(){
 	gun = new createjs.Shape(); 
 	gun.graphics.beginFill('#FFF000'); 
-	gun.x = w / 2; // WE NEED THIS TO PLACE THE RECT IN THE MIDDLE OF THE CANVAS
-	gun.y = h - 20; // WE NEED THIS TO PLACE THE RECT IN THE MIDDLE OF THE CANVAS
+	gun.x = w/2; // WE NEED THIS TO PLACE THE RECTANGLE IN THE MIDDLE OF THE CANVAS
+	gun.y = 270; // WE NEED THIS TO PLACE THE RECTANGLE IN THE MIDDLE OF THE CANVAS
 	gun.graphics.drawRect(0, 0, 10, 30); //NOW WE CREATE THE RECTANGLE AND PROVIDES IT WITH THE COORDINATES (x, y, width, height)
 	gun.graphics.endFill();
 	stage.addChild(gun);
@@ -67,8 +69,7 @@ function operateGun(e){
 			
 		case 32:
 			console.log('shoot shoot!');
-			if (fired === false) {shootBullet();};
-			//shootBullet();
+			shootBullet();
 			break;
 					}
 }
@@ -86,12 +87,9 @@ function shootBullet(){
 	.to({x:gunCoord.x, y:0}, 1000)
 	
 	fired = true;
-	//createjs.Ticker.on("tick", bulletControl);
+	createjs.Ticker.on("tick", bulletControl);
 }
-	
-	
-	
-/*	
+
 function bulletControl(event){
 	var pt = bullet.localToLocal(bulletCoord, 300, target); //the bullet is x and the 300 is the y coordianates and then compares the target)
 	console.log(pt.x, pt.y);
@@ -108,14 +106,13 @@ function bulletControl(event){
 	if(pt.y<=10){
 		fired = false;
 		target.alpha = 1;
-		stage.removechild(bullet);
+		stage.removeChild(bullet);
 		event.remove();
 	}
 	
 stage.update(event);	
 	
 }
-*/
 	
 function addScore(){
 	score = new createjs.Text(0, "20px Arial", "#E77170"); //THE INITIAL VALUE (TEXT CONTENT), THE FONT AND THEN COLOUR. YOU CAN DELETE THE 0 AND THEN THE INITIAL VALUE WILL BE NOTHING AND IT STARTS COUNTING.
@@ -124,6 +121,14 @@ function addScore(){
 	score.textBaseline = "alphabetic"; //VERTICAL ALIGNMENT
 	score.value = 0; //TASSESING THE VALUE AND SET IT TO 0
 	stage.addChild(score);
+}
+	
+function win(){
+	if (score == 3){
+		stage.removechild(target);
+		stage.removechild(bullet);
+		stage.removechild(gun);
+	}
 }
 	
 </script>
