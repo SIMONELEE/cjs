@@ -23,8 +23,8 @@ function init(){
 	createjs.Ticker.on("tick", tick); // the main listener
 }
 	
-function tick(event) {
-	gunCoord = gun.localToGlobal(w / 2, h); //ALWAYS TRACING THE X POSITION OF THE GUN
+function tick(event) {	
+	gunCoord = gun.localToGlobal(w / 2, h - 20); //ALWAYS TRACING THE X POSITION OF THE GUN
 	//win();
 	stage.update(event);
 }
@@ -33,9 +33,9 @@ function tick(event) {
 function drawGun(){
 	gun = new createjs.Shape(); 
 	gun.graphics.beginFill('#FFF000'); 
-	gun.x = w/2; // WE NEED THIS TO PLACE THE CIRLE IN THE MIDDLE OF THE CANVAS
-	gun.y = 270; // WE NEED THIS TO PLACE THE CIRLE IN THE MIDDLE OF THE CANVAS
-	gun.graphics.drawRect(0, 0, 10, 30); //NOW WE CREATE THE CIRCLE AND PROVIDES IT WITH THE COORDINATES (x, y, width, height)
+	gun.x = w / 2; // WE NEED THIS TO PLACE THE RECT IN THE MIDDLE OF THE CANVAS
+	gun.y = h - 20; // WE NEED THIS TO PLACE THE RECT IN THE MIDDLE OF THE CANVAS
+	gun.graphics.drawRect(0, 0, 10, 30); //NOW WE CREATE THE RECTANGLE AND PROVIDES IT WITH THE COORDINATES (x, y, width, height)
 	gun.graphics.endFill();
 	stage.addChild(gun);
 }
@@ -43,7 +43,7 @@ function drawGun(){
 function drawTarget(){
 	target = new createjs.Shape(); 
 	target.graphics.beginFill('#C3073F'); 
-	target.graphics.drawRect(0, 0, 50, 10); //NOW WE CREATE THE CIRCLE AND PROVIDES IT WITH THE COORDINATES (x, y, width, height)
+	target.graphics.drawRect(0, 0, 50, 10); //NOW WE CREATE THE RECTANGLE AND PROVIDES IT WITH THE COORDINATES (x, y, width, height)
 	stage.addChild(target);
 }
 
@@ -75,62 +75,57 @@ function operateGun(e){
 	
 function shootBullet(){
 	bullet = new createjs.Shape();
-	fired = true;
-	bullet.graphics.beginFill('#F1F1F1');//.drawRect(gunCoord.x, gunCoord.y, 10, 10);
-	bullet.x = gunCoord.x; 
-	bullet.y = gunCoord.y;
-	//bullet.graphics.drawRect(0, 0, 10, 10); //NOW WE CREATE THE CIRCLE AND PROVIDES IT WITH THE COORDINATES (x, y, width, height)
-	bullet.graphics.drawRect(gunCoord.x, gunCoord.y, 10, 10);
+	bullet.graphics.beginFill('#F1F1F1');
+	bullet.x = gun.x; 
+	bullet.y = gun.y;
+	//bullet.graphics.drawRect(0, 0, 10, 10); //NOW WE CREATE THE RECTANGLE AND PROVIDES IT WITH THE COORDINATES (x, y, width, height)
+	bullet.graphics.drawRect(bullet.x, bullet.y, 10, 10);
 	stage.addChild(bullet);
 	bulletCoord = gunCoord.x; //THE X VALUE OF THE BULLET
 	createjs.Tween.get(bullet)
 	.to({x:gunCoord.x, y:0}, 1000)
-	createjs.Ticker.on("tick", bulletControl);
-	//stage.removeChild(bullet);
+	
+	fired = true;
+	//createjs.Ticker.on("tick", bulletControl);
 }
 	
 	
 	
-	
+/*	
 function bulletControl(event){
-	var pt = bullet.localToLocal(bulletCoord,300,target); //the bullet is x and the 300 is the y coordianates and then compares the target)
-	console.log(pt.y, pt.y);
+	var pt = bullet.localToLocal(bulletCoord, 300, target); //the bullet is x and the 300 is the y coordianates and then compares the target)
+	console.log(pt.x, pt.y);
+	console.log('pt.y:' + pt.y);
+	console.log('pt.x:' + pt.x);
 	if (target.hitTest(pt.x, pt.y)){
-		stage.removeChild(bullet);
 		target.alpha = 0.1;
 		score.value++;
 		score.text = score.value;
+		stage.removeChild(bullet);
 		event.remove();
 	};
 	
 	if(pt.y<=10){
-		fired= false;
+		fired = false;
 		target.alpha = 1;
 		stage.removechild(bullet);
 		event.remove();
 	}
+	
 stage.update(event);	
+	
 }
-
+*/
 	
 function addScore(){
-	score = new createjs.Text(0, "20px Arial", "#E77170"); //THE INITIAL VALUE (TEXT CONTENT), THE FONT AND THEN COLOUR. YOU CAN DELETE THE 0 AND THEN THE INITIAL VALUE WILL BE NOTHING AND IT STARTS COUNTING FROM THE CLICKS.
-	score.x = w - 50; //ADJUSTABLE TO THE CONVAS
+	score = new createjs.Text(0, "20px Arial", "#E77170"); //THE INITIAL VALUE (TEXT CONTENT), THE FONT AND THEN COLOUR. YOU CAN DELETE THE 0 AND THEN THE INITIAL VALUE WILL BE NOTHING AND IT STARTS COUNTING.
+	score.x = w - 50; //ADJUSTABLE TO THE CANVAS
 	score.y = h - h + 50;
 	score.textBaseline = "alphabetic"; //VERTICAL ALIGNMENT
 	score.value = 0; //TASSESING THE VALUE AND SET IT TO 0
 	stage.addChild(score);
 }
 	
-/*function win(){
-	if (score == 3){
-		stage.removechild(target);
-		stage.removechild(bullet);
-		stage.removechild(gun);
-		
-	}
-}
-	*/
 </script>
 <style type="text/css">
 #demoCanvas {
