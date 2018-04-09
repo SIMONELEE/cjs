@@ -15,7 +15,7 @@ function init(){
 	stage = new createjs.Stage("demoCanvas");
 	h = demoCanvas.height;
 	w = demoCanvas.width;
-	drawTarget(); 
+	drawTarget();
 	drawGun();
 	moveTarget();
 	addScore();
@@ -24,7 +24,7 @@ function init(){
 }
 	
 function tick(event) {
-	gunCoord = gun.localToGlobal(w / 2, h - 10); //ALWAYS TRACING THE X POSITION OF THE GUN
+	gunCoord = gun.localToGlobal(w / 2, h); //ALWAYS TRACING THE X POSITION OF THE GUN
 	//win();
 	stage.update(event);
 }
@@ -68,30 +68,33 @@ function operateGun(e){
 		case 32:
 			console.log('shoot shoot!');
 			if (fired === false) {shootBullet();};
-			shootBullet();
+			//shootBullet();
 			break;
 					}
 }
 	
 function shootBullet(){
-	bullet = stage.addChild(new createjs.Shape());
-	//fired = true;
-	bullet.graphics.beginFill('#F1F1F1').drawRect(gunCoord.x, gunCoord.y, 5, 5);
-	//bullet.x = gunCoord.x; 
-	//bullet.y = gunCoord.y;
+	bullet = new createjs.Shape();
+	fired = true;
+	bullet.graphics.beginFill('#F1F1F1');//.drawRect(gunCoord.x, gunCoord.y, 10, 10);
+	bullet.x = gunCoord.x; 
+	bullet.y = gunCoord.y;
 	//bullet.graphics.drawRect(0, 0, 10, 10); //NOW WE CREATE THE CIRCLE AND PROVIDES IT WITH THE COORDINATES (x, y, width, height)
-	//stage.addChild(bullet);
+	bullet.graphics.drawRect(gunCoord.x, gunCoord.y, 10, 10);
+	stage.addChild(bullet);
 	bulletCoord = gunCoord.x; //THE X VALUE OF THE BULLET
 	createjs.Tween.get(bullet)
-	.to({x:gunCoord.x, y:-10}, 1000)
+	.to({x:gunCoord.x, y:0}, 1000)
 	createjs.Ticker.on("tick", bulletControl);
-	stage.removeChild(bullet);
+	//stage.removeChild(bullet);
 }
+	
+	
 	
 	
 function bulletControl(event){
 	var pt = bullet.localToLocal(bulletCoord,300,target); //the bullet is x and the 300 is the y coordianates and then compares the target)
-	console.log(pt.y, pt.y); //PT.X IS THE TARGET & PT.Y = BULLET.Y
+	console.log(pt.y, pt.y);
 	if (target.hitTest(pt.x, pt.y)){
 		stage.removeChild(bullet);
 		target.alpha = 0.1;
@@ -101,14 +104,14 @@ function bulletControl(event){
 	};
 	
 	if(pt.y<=10){
-		fired = false;
+		fired= false;
 		target.alpha = 1;
 		stage.removechild(bullet);
 		event.remove();
 	}
-	
-	stage.update(event);
+stage.update(event);	
 }
+
 	
 function addScore(){
 	score = new createjs.Text(0, "20px Arial", "#E77170"); //THE INITIAL VALUE (TEXT CONTENT), THE FONT AND THEN COLOUR. YOU CAN DELETE THE 0 AND THEN THE INITIAL VALUE WILL BE NOTHING AND IT STARTS COUNTING FROM THE CLICKS.
@@ -122,6 +125,8 @@ function addScore(){
 /*function win(){
 	if (score == 3){
 		stage.removechild(target);
+		stage.removechild(bullet);
+		stage.removechild(gun);
 		
 	}
 }
