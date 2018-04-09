@@ -90,6 +90,7 @@ function shootBullet(){
 	createjs.Ticker.on("tick", bulletControl);
 }
 
+//I GET THE UNDERSTANDING OF THIS FUNCTION TO USE THE HITTEST, BUT I CAN'T FIGURE OUT HOW TO USE THE LOCALTOLOCAL CORRECTLY, ALONG WITH TRACKING THE BULLETS CORRDIANTES, TO CHECK FOR IMPACT WITH THE TARGET.
 function bulletControl(event){
 	var pt = bullet.localToLocal(bulletCoord, 300, target); //the bullet is x and the 300 is the y coordianates and then compares the target)
 	console.log(pt.x, pt.y);
