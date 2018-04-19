@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Cat Game!</title>
+	<style>
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+body {
+	background:#5cbe02;
+}
+h1 {
+	margin-left: 12%;
+	font-family: 'Press Start 2P', cursive;
+	color: #fff;
+	margin: 0, auto;
+	width: 100%;
+}
+</style>
+	<script src="phaser/phaser.min.js"></script>
+	<script>
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
+
+function preload() {
+
+    game.load.image('phaser', 'images/catcher.png');
+	//game.load.image('phaser', 'images/unicorn.png');
+    game.load.spritesheet('veggies', 'sprites/space_plans.png', 36, 36);
+
+}
+
+var sprite;
+var group;
+var cursors;
+
+function create() {
+
+    game.world.setBounds(0, 0, 2000, 1200);
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    game.stage.backgroundColor = '#2d2d2d';
+
+    sprite = game.add.sprite(1960, 200, 'phaser');
+
+    game.physics.arcade.sortDirection = Phaser.Physics.Arcade.RIGHT_LEFT;
+
+    game.physics.arcade.enable(sprite);
+    
+    group = game.add.physicsGroup(Phaser.Physics.ARCADE);
+
+    for (var i = 0; i < 300; i++)
+    {
+        var c = group.create(game.rnd.integerInRange(200, 1900), game.rnd.integerInRange(0, 1100), 'veggies', game.rnd.integerInRange(0, 35));
+        c.name = 'veg' + i;
+        c.body.immovable = true;
+    }
+
+    for (var i = 0; i < 20; i++)
+    {
+        //  Here we'll create some chillis which the player can pick-up. They are still part of the same Group.
+        var c = group.create(game.rnd.integerInRange(100, 770), game.rnd.integerInRange(0, 570), 'veggies', 17);
+        c.body.immovable = true;
+    }
+
+    game.camera.follow(sprite);
+
+    cursors = game.input.keyboard.createCursorKeys();
+
+}
+
+function update() {
+
+    game.physics.arcade.collide(sprite, group, collisionHandler, null, this);
+
+    sprite.body.velocity.x = 0;
+    sprite.body.velocity.y = 0;
+
+    if (cursors.left.isDown)
+    {
+        sprite.body.velocity.x = -200;
+    }
+    else if (cursors.right.isDown)
+    {
+        sprite.body.velocity.x = 200;
+    }
+
+    if (cursors.up.isDown)
+    {
+        sprite.body.velocity.y = -200;
+    }
+    else if (cursors.down.isDown)
+    {
+        sprite.body.velocity.y = 200;
+    }
+
+}
+
+function collisionHandler (player, veg) {
+
+    //  If the player collides with the chillis then they get eaten :)
+    //  The chilli frame ID is 17
+
+    if (veg.frame === 17)
+    {
+        veg.kill();
+    }
+
+}
+
+	</script>
+	</head>
+
+	<body>
+<!--<h1>CATCHER: LEVEL ONE</h1>-->
+</body>
+</html>
+

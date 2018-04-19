@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "alien.png",
+	"frame": {"x":515,"y":515,"w":440,"h":512},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":0,"w":440,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+{
+	"filename": "jupiter.png",
+	"frame": {"x":1,"y":1,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+{
+	"filename": "mars.png",
+	"frame": {"x":1,"y":515,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+{
+	"filename": "moon.png",
+	"frame": {"x":1,"y":1029,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+},
+{
+	"filename": "planet-earth.png",
+	"frame": {"x":515,"y":1,"w":512,"h":512},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":512},
+	"sourceSize": {"w":512,"h":512}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "space.png",
+	"format": "RGBA8888",
+	"size": {"w":1028,"h":1542},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:5eb1bd3cd5b18b260ff9602b11d4ae71:94d699178c9aa7d6a42c6dd33e368348:5c66d13d521b19a155e36d6dbcb34ba3$"
+}
+}
