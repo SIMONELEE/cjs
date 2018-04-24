@@ -187,27 +187,37 @@
             <key type="filename">../../../../../Users/simonelee/Downloads/jupiter.png</key>
             <key type="filename">../../../../../Users/simonelee/Downloads/mars.png</key>
             <key type="filename">../../../../../Users/simonelee/Downloads/moon.png</key>
-            <key type="filename">../../../../../Users/simonelee/Downloads/planet-earth.png</key>
+            <key type="filename">../../../../../Users/simonelee/Downloads/science-2.png</key>
+            <key type="filename">../../../../../Users/simonelee/Downloads/science-3.png</key>
+            <key type="filename">../../../../../Users/simonelee/Downloads/science-4.png</key>
+            <key type="filename">../../../../../Users/simonelee/Downloads/science-5.png</key>
+            <key type="filename">../../../../../Users/simonelee/Downloads/science.png</key>
+            <key type="filename">../../../../../Users/simonelee/Downloads/shape.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>9,9,19,19</rect>
+                <rect>7,7,13,13</rect>
                 <key>scale9Paddings</key>
-                <rect>9,9,19,19</rect>
+                <rect>7,7,13,13</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../../../../Users/simonelee/Downloads/moon.png</filename>
+            <filename>../../../../../Users/simonelee/Downloads/science.png</filename>
+            <filename>../../../../../Users/simonelee/Downloads/shape.png</filename>
             <filename>../../../../../Users/simonelee/Downloads/mars.png</filename>
+            <filename>../../../../../Users/simonelee/Downloads/moon.png</filename>
+            <filename>../../../../../Users/simonelee/Downloads/science-2.png</filename>
+            <filename>../../../../../Users/simonelee/Downloads/science-3.png</filename>
+            <filename>../../../../../Users/simonelee/Downloads/science-4.png</filename>
+            <filename>../../../../../Users/simonelee/Downloads/science-5.png</filename>
             <filename>../../../../../Users/simonelee/Downloads/jupiter.png</filename>
             <filename>../../../../../Users/simonelee/Downloads/alien.png</filename>
-            <filename>../../../../../Users/simonelee/Downloads/planet-earth.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

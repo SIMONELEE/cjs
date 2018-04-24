@@ -1,36 +1,19 @@
-<!doctype html>
-<html>
-	<head>
-	<meta charset="UTF-8">
-	<title>timer</title>
-	<style>
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
-body {
-	background:#5cbe02;
-}
-h1 {
-	margin-left: 12%;
-	font-family: 'Press Start 2P', cursive;
-	color: #fff;
-	margin: 0, auto;
-	width: 100%;
-}
-</style>
-	<script src="phaser/phaser.min.js"></script>
-<script>
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'test', null, false, false);
-var BasicGame = function (game) {};
-BasicGame.Boot = function (game) {};
+//var game = new Phaser.Game(800, 600, Phaser.AUTO, 'test', null, false, false);
+
+//var BasicGame = function (game) {};
+
+//BasicGame.Boot = function (game) {};
+
 var timer, timerEvent, text;
-var countDown = 10;
+var countDown = 30;
 var cursors, cat, catcher, score, scoreTXT, music, catsound;
 BasicGame.Boot.prototype = {
     preload: function () {
-
+	
 		//images
-		game.load.image('bg', 'images/castle-bg.jpg');
+		game.load.image('bg', 'images/bg.png');
 		game.load.image('catcher', 'images/catcher.png');
-		game.load.image('cat', 'images/unicorn.png');
+		game.load.image('cat', 'images/cat.png');
 		
 		
 		//music
@@ -135,7 +118,7 @@ BasicGame.Boot.prototype = {
 	
     render: function () {
         // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
-        if (!timer.running && score != 5) {
+        if (!timer.running && score != 10) {
 			loseText = game.add.text(game.world.centerX, game.world.centerY, "- You lose -\nclick to play again", { font: "25px 'Press Start 2P'", fill: '#ffffff', align: "center"  });
     		loseText.anchor.setTo(0.5, 0.5);
 			game.input.onDown.addOnce(youLose, this);
@@ -167,7 +150,7 @@ function catHitHandler(){
 		cat.y = game.height * Math.random();
 		score++;
 		scoreTXT.setText(score.toString());
-			if (score == 5) {
+			if (score == 10) {
 				winText = game.add.text(game.world.centerX, game.world.centerY, "- You win -\nclick to play again", { font: "25px 'Press Start 2P'", fill: '#ffffff', align: "center"  });
 				winText.anchor.setTo(0.5, 0.5);
 				game.input.onDown.addOnce(youWin, this);
@@ -191,9 +174,3 @@ function catHitHandler(){
 		
 game.state.add('Boot', BasicGame.Boot);
 game.state.start('Boot');
-	</script>
-	</head>
-	<body>
-<!--<h1>CATCHER: LEVEL ONE</h1>-->
-</body>
-</html>

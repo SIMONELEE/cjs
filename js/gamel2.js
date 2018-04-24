@@ -1,23 +1,3 @@
-<!doctype html>
-<html>
-	<head>
-	<meta charset="UTF-8">
-	<title>timer</title>
-	<style>
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
-body {
-	background:#5cbe02;
-}
-h1 {
-	margin-left: 12%;
-	font-family: 'Press Start 2P', cursive;
-	color: #fff;
-	margin: 0, auto;
-	width: 100%;
-}
-</style>
-	<script src="phaser/phaser.min.js"></script>
-<script>
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'test', null, false, false);
 var BasicGame = function (game) {};
 BasicGame.Boot = function (game) {};
@@ -191,9 +171,3 @@ function catHitHandler(){
 		
 game.state.add('Boot', BasicGame.Boot);
 game.state.start('Boot');
-	</script>
-	</head>
-	<body>
-<!--<h1>CATCHER: LEVEL ONE</h1>-->
-</body>
-</html>
