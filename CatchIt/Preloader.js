@@ -23,6 +23,13 @@ CatchIt.Preloader.prototype = {
 		this.load.image('catcher', 'images/catcher.png');
 		this.load.image('catfish', 'images/catfish.png');
 		
+		//ASSETS FOR LEVEL 2:
+		//IMAGES
+		this.load.image('bgl2', 'images/spacebg.jpg');
+		this.load.image('astro', 'images/astronaut.png');
+		this.load.image('alien', 'images/alien.png');
+		
+		
 		
 	},
 	
