@@ -5,7 +5,7 @@ CatchIt.Boot = function(game) {};
 CatchIt.Boot.prototype = {
 	preload: function(){
 		this.load.image('preloaderBar', 'images/loader_bar.png');
-		this.load.image('titleimage', 'images/TitleImage.png');
+		this.load.image('titleimage', 'images/titletext.png');
 	},
 	
 	create: function(){

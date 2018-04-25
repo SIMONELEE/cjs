@@ -1,11 +1,13 @@
 CatchIt.StartMenu = function(game){
 	this.startBG;
+	this.startTxt;
 	this.startPrompt;
+	
 };
 
 CatchIt.StartMenu.prototype = {
 	create: function(){
-		startBG = this.add.image(0, 0, 'titlescreen');
+		startBG = this.add.image(0, 0, 'titleimage');
 		startBG.inputEnabled = true;
 		startBG.events.onInputDown.addOnce(this.startGame, this);
 		startPrompt = this.add.bitmapText(this.world.centerX-155, this.world.centerY+180, 'eightbitwonder', 'Click to Start!', 24);
