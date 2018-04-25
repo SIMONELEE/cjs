@@ -1,3 +1,98 @@
+CatcherGame.Game = function(game) {
+	
+};
+CatcherGame.Game.prototype = {
+	create: function() {
+		//Create BG
+		this.add.sprite(0, 0, 'bgl1');
+		
+		//Create Catcher
+		catcher = this.add.sprite(this.world.width/2, this.world.height/2, 'catcherl1');
+		catcher.anchor.setTo(0.5, 0.5);
+		this.physics.enable(catcher, Phaser.Physics.ARCADE);
+        catcher.enableBody = true;
+	
+		//Create Cat
+		cat = this.add.sprite(this.world.width * Math.random(), this.world.height * Math.random(),'catl1');
+		cat.anchor.setTo(0.5, 0.5);
+		this.physics.enable(cat, Phaser.Physics.ARCADE);
+        cat.enableBody = true;
+		
+		cursors = this.input.keyboard.createCursorKeys();
+		
+		//create SCORE
+		score = 0;
+		scoreTXT = this.add.text(10, 10, score.toString(), { font: "30px Press Start 2P", fill: "#ffffff"});
+		
+		
+		//add sound & music
+		music = game.add.audio('background');
+		music.play();
+		
+		catsound= game.add.audio('horse');
+		
+		
+		
+		// Create a custom timer
+        timer = this.time.create();
+        
+        // Create a delayed event 1m and 30s from now
+        timerEvent = timer.add(Phaser.Timer.SECOND * countDown, this.endTimer, this);
+        
+        // Start the timer
+        timer.start();
+      
+        text = this.add.text(750, 30, this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 
+        { font: "30px 'Press Start 2P'", fill: "#ff0044" });
+      
+        text.anchor.set(0.5);
+     
+      
+        this.scoreLabelTween = this.add.tween(text.scale).to({ x: 1.2, y: 1.2}, 2000, Phaser.Easing.Linear.In);
+	
+	},
+	update: function() {
+		this.keyboard();
+		this.physics.arcade.overlap(cat, catcher, catHitHandler, null, this);
+		
+		var tmp = this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000));
+ 
+        if (timer.running && tmp >= 1) {
+          text.text = this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000));
+          this.scoreLabelTween.start();
+        }
+		
+		//runs the game loop
+		//if left arrow is pressed
+		if(cursors.left.isDown && catcher.x>10){
+			catcher.x -= 5;
+			//scaling 100% pointing in the orginal directiosn
+			catcher.scale.x = 1;
+			
+		}
+		
+		if(cursors.right.isDown && catcher.x<game.width-10){
+			catcher.x += 5;
+			catcher.scale.x = -1;
+			
+		}
+		
+		if(cursors.up.isDown && catcher.y>10){
+			catcher.y -= 5;
+			
+		}
+		
+		if(cursors.down.isDown && catcher.y<game.height-10){
+			catcher.y += 5;
+			}
+		
+		
+		//arguments: objects, callback function
+		
+		game.physics.arcade.overlap(catcher, cat, catHitHandler);
+	}
+}
+
 //var game = new Phaser.Game(800, 600, Phaser.AUTO, 'test', null, false, false);
 
 //var BasicGame = function (game) {};
@@ -28,7 +123,7 @@ BasicGame.Boot.prototype = {
 		game.add.sprite(0,0, 'bg');
 		
 		//Create Catcher
-		catcher=game.add.sprite(game.width / 2 , 350, 'catcher');
+		catcher = this.add.sprite(this.world.width / 2 , this.world.height/2, 'catcherl1');
 		catcher.anchor.setTo(0.5, 0.5);
 		
 		//Create Cat

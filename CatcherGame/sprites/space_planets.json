@@ -1,0 +1,52 @@
+{"frames": {
+
+"alien.png":
+{
+	"frame": {"x":157,"y":1,"w":35,"h":37},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":35,"h":37},
+	"sourceSize": {"w":37,"h":37}
+},
+"jupiter.png":
+{
+	"frame": {"x":1,"y":1,"w":37,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":37},
+	"sourceSize": {"w":37,"h":37}
+},
+"mars.png":
+{
+	"frame": {"x":40,"y":1,"w":37,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":37},
+	"sourceSize": {"w":37,"h":37}
+},
+"moon.png":
+{
+	"frame": {"x":79,"y":1,"w":37,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":37},
+	"sourceSize": {"w":37,"h":37}
+},
+"planet-earth.png":
+{
+	"frame": {"x":118,"y":1,"w":37,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":37},
+	"sourceSize": {"w":37,"h":37}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "space_planets.png",
+	"format": "RGBA8888",
+	"size": {"w":193,"h":39},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cc649f208bf3c4fcbefcbcf495f931f2:cb533bb60801498d8c79c8b4e238bc34:10354b125a4ef9e7ccad0115fbd7e4e7$"
+}
+}
